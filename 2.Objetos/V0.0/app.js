@@ -56,7 +56,7 @@ function initGameView(title) {
         console.writeln(
           `Intento nro: ${game.getAttemps()} resultado: ${game.getResult(
             propousalCombination
-          )} ${game.isLoser()} ${game.isWinner()} ${game.finished()}`
+          )} ${game.isLoser()} ${game.isWinner()} ${game.finished()} | ${game.getPropousalsCombinations()}`
         ); //llevar a una vista
       } while (!game.finished());
       console.writeln("GANO");
@@ -72,7 +72,6 @@ function initGame() {
   return {
     addPropouseCombination: function (propousalCombination) {
       propousalsCombinations.push(propousalCombination);
-      console.writeln(`${propousalCombination} ${propousalsCombinations}`);
     },
     getResult: function (propousalCombination) {
       result = [];
@@ -85,6 +84,7 @@ function initGame() {
           result.push(" ");
         }
       });
+      propousalsCombinations.push(result);
       return result;
     },
     isLoser: function () {
@@ -101,6 +101,9 @@ function initGame() {
     },
     getMaxAttemps: function () {
       return MAX_ATTEMPS;
+    },
+    getPropousalsCombinations: function () {
+      return propousalsCombinations;
     },
   };
 }
