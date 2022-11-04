@@ -1,0 +1,8 @@
+@startuml mastermind_clases
+class Combination{
+    int COMBINATION_LENGTH = 4
+    string POSSIBLE_COLORS = "rgbypw"
+
+    
+} 
+@enduml
