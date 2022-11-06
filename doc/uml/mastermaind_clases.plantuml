@@ -1,8 +1,80 @@
 @startuml mastermind_clases
-class Combination{
-    int COMBINATION_LENGTH = 4
-    string POSSIBLE_COLORS = "rgbypw"
 
-    
+class MastermindView{
+    - gameMode()
+    - playGame()
+}
+
+class Game {
+    - int MAX_ATTEMPS = 10
+    - string propousalsCombinations[]
+    - int NUM_PLAYERS = 0
+    - isWinner()
+    - isLooser()
+    - addPropouseCombination()
+    - getResult()
+    - getMaxAttemps()
+    - getAttemps()
+    - getPropousalsCombinations()
+}
+
+class Combination{
+    - int COMBINATION_LENGTH = 4
+    - string POSSIBLE_COLORS = "rgbypw"
+    - int hasValidLength()
+    - boolean hasValidColors()
+    - boolean hasRepetedColors()
+    - string getPossibleColors()
+    - int getCombinationLength()
+
 } 
+
+class CombinationView{
+    - getSecretCombination()
+    - getPropousalCombination()
+}
+
+
+class GameView{
+    - playGame()
+}
+
+class Board{
+
+}
+
+class Turn{
+    - getNext()
+}
+
+class BoardView{
+    - showTitle()
+    - showResult()
+}
+
+class ContinueDialogView{
+    - isAfirmative()
+    - isNegative()
+}
+
+class SecretCombination{
+
+}
+class PropousalCombination{
+
+}
+
+MastermindView .down.> ContinueDialogView
+MastermindView o-down-> GameView
+
+GameView *-down-> Game
+GameView *-down-> CombinationView
+GameView *-down-> Board
+GameView o-down-> Turn
+
+Board *-down-> BoardView
+
+CombinationView *-down-> Combination
+Combination <|-down- SecretCombination
+Combination <|-down- PropousalCombination
 @enduml

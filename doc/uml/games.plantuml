@@ -1,0 +1,52 @@
+@startuml Games
+
+class CurrentGame{
+    - playGame()
+}
+
+class ChoosePlayers{
+    - numPlayers()
+}
+
+class Game {
+    - isWinner()
+    - isLooser()
+    - getResult()
+    - getMaxAttemps()
+    - getAttemps()
+}
+
+class GameView{
+    - playGame()
+}
+
+class Board{
+
+}
+
+class Turn{
+    - getNext()
+}
+
+class BoardView{
+    - showTitle()
+    - showResult()
+}
+
+class ContinueDialogView{
+    - isAfirmative()
+    - isNegative()
+}
+
+CurrentGame o-down-> ChoosePlayers
+CurrentGame .down.> ContinueDialogView
+CurrentGame o-down-> GameView
+
+GameView *-down-> Game
+GameView *-down-> BoardView
+GameView *-down-> Turn
+
+BoardView *-down-> Board
+
+
+@enduml

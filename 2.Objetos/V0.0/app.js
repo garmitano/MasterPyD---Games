@@ -84,13 +84,14 @@ function initGame() {
           result.push(" ");
         }
       });
+      //VER
       propousalsCombinations.push(result);
       return result;
     },
     isLoser: function () {
       return this.getAttemps() === MAX_ATTEMPS ? true : false;
     },
-    isWinner() {
+    isWinner: function {
       return result.every((element) => element === "b");
     },
     finished: function () {
