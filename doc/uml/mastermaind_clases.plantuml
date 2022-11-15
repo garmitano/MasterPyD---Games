@@ -1,8 +1,7 @@
 @startuml mastermind_clases
 
-class MastermindView{
-    - gameMode()
-    - playGame()
+class Mastermind{
+    - playGames()
 }
 
 class Game {
@@ -11,6 +10,7 @@ class Game {
     - int NUM_PLAYERS = 0
     - isWinner()
     - isLooser()
+    - isFinished()
     - addPropouseCombination()
     - getResult()
     - getMaxAttemps()
@@ -36,19 +36,29 @@ class CombinationView{
 
 
 class GameView{
+    - playGames()
+    - isResumed()
     - playGame()
 }
 
 class Board{
+    resetBoard()
+}
+
+class TurnView{
+    - readNumPlayers()
+    - interact()
 
 }
 
 class Turn{
+    - reset()
     - getNext()
 }
 
 class BoardView{
     - showTitle()
+    - showIt()
     - showResult()
 }
 
@@ -64,15 +74,24 @@ class PropousalCombination{
 
 }
 
-MastermindView .down.> ContinueDialogView
-MastermindView o-down-> GameView
+Mastermind *-down-> GameView
+Mastermind *-down-> Game
 
-GameView *-down-> Game
-GameView *-down-> CombinationView
-GameView *-down-> Board
-GameView o-down-> Turn
+GameView .down.> ContinueDialogView
+GameView *-down-> BoardView
+GameView *-down-> TurnView
+GameView .-down-> Game
 
-Board *-down-> BoardView
+Game .-down-> Turn
+Game .-down-> Board
+
+BoardView *-down-> Board
+BoardView .-down-> Game
+
+TurnView *-down-> Turn
+TurnView .-down-> BoardView
+TurnView *-down-> CombinationView
+TurnView .-down-> Game
 
 CombinationView *-down-> Combination
 Combination <|-down- SecretCombination
