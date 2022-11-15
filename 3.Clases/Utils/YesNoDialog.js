@@ -1,6 +1,6 @@
-import { console } from "../Utils/console.js";
+import { console } from "./console.js";
 
-export class isContinuedDialogView {
+export class YesNoDialog {
    #answer = "";
 
    constructor() {
