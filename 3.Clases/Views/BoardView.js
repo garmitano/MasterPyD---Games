@@ -1,7 +1,7 @@
 import { console } from "../Utils/console.js";
 import { Board } from "../Models/Board.js";
 
-export class BoardView {
+class BoardView {
    #board;
 
    constructor() {
@@ -9,6 +9,8 @@ export class BoardView {
    }
 
    showTitle() {
-      console.writeln("-------Mastermind-------");
+      console.writeln("\n-------Mastermind-------\n");
    }
 }
+
+export { BoardView };

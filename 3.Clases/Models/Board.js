@@ -1,1 +1,3 @@
-export class Board {}
+class Board {}
+
+export { Board };

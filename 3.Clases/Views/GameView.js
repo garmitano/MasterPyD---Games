@@ -20,8 +20,8 @@ export class GameView {
    }
 
    playGame() {
-      let numPlayers = this.#turnView.askModeGame();
       this.#boardView.showTitle();
+      let numPlayers = this.#turnView.askModeGame();
       do {
          this.#turnView.interact(numPlayers);
       } while (!this.#game.isFinished());
