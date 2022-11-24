@@ -2,7 +2,7 @@ import { YesNoDialog } from "../Utils/YesNoDialog.js";
 import { BoardView } from "./BoardView.js";
 import { TurnView } from "./TurnView.js";
 
-export class GameView {
+class GameView {
    #boardView;
    #turnView;
    #game;
@@ -21,9 +21,8 @@ export class GameView {
 
    playGame() {
       this.#boardView.showTitle();
-      let numPlayers = this.#turnView.askModeGame();
       do {
-         this.#turnView.interact(numPlayers);
+         this.#turnView.interact();
       } while (!this.#game.isFinished());
    }
 
@@ -32,3 +31,4 @@ export class GameView {
       return isContinued.isAfirmative();
    }
 }
+export { GameView };
