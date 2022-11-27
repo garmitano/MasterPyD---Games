@@ -24,13 +24,15 @@ class GameView{
 }
 
 class TurnView{
-    - readNumPlayers()
-    - interact()
+    - numPlayers
+    - interact(numPlayer)
+    - initPlayers()
 }
 
 class Turn{
     - reset()
     - getNext()
+    - getActivePlayer()
 }
 
 class BoardView{
@@ -39,9 +41,23 @@ class BoardView{
     - showResult()
 }
 
-class ContinueDialogView{
+class YesNoDialogView{
     - isAfirmative()
     - isNegative()
+}
+
+class GameMode{
+    - numPlayers
+    - possibleModes
+    - MIN
+    - MAX
+    - read()
+}
+
+class ClosedInterval{
+    - min
+    - max
+    - isIncluded()
 }
 
 class Combination{
@@ -52,12 +68,15 @@ class Combination{
     - boolean hasRepetedColors()
     - string getPossibleColors()
     - int getCombinationLength()
+    - read()
 
 } 
 class SecretCombination{
+    - read(player)
     - getSecretCombination()
 }
 class PropousalCombination{
+    - read(player)
     - getPropousalCombination()
 }
 
@@ -71,24 +90,21 @@ Mastermind *-down-> Game
 GameView *-down-> BoardView
 GameView *-down-> TurnView
 GameView .-down-> Game
-GameView .-down-> ContinueDialogView
+GameView *-down-> YesNoDialogView
 
 TurnView *-down-> Turn
-TurnView *-down-> Player
 TurnView .-down-> BoardView
-TurnView .-down-> Game
-
-Game .-down-> Combination
+TurnView *-down-> GameMode
+TurnView .-down-> Combination
+TurnView .-down-> Player
 
 BoardView .-down-> Game
 
 Player <|-down- RandomPlayer
 Player <|-down- HumanPlayer
 
-RandomPlayer *-down-> SecretCombination
-
-HumanPlayer *-down-> PropousalCombination
-
 Combination <|-down- SecretCombination
 Combination <|-down- PropousalCombination
+
+GameMode *-down-> ClosedInterval
 @enduml
