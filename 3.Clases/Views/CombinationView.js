@@ -1,5 +1,6 @@
 import { console } from "../Utils/console.js";
 import { PropousalCombination } from "../Models/Combination.js";
+import { Message } from "./Message.js";
 
 class CombinationView {
    #propousalCombination;
@@ -9,10 +10,10 @@ class CombinationView {
       this.getPropousalCombination();
    }
 
-   getPropousalCombination() {
+   getCombination(message) {
       let propousalCombination = "";
       do {
-         propousalCombination = console.readString("Propon una combinación: ");
+         propousalCombination = console.readString(message);
          if (!this.#propousalCombination.hasValidLengh(propousalCombination)) {
             console.writeln("Debe ingresar una combinacion de 4 colores\n");
          } else if (

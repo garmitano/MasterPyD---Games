@@ -21,6 +21,7 @@ class GameView {
 
    playGame() {
       this.#boardView.showTitle();
+      this.#turnView.getSecretCombination();
       do {
          this.#turnView.interact();
       } while (!this.#game.isFinished());

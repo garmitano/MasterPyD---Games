@@ -7,7 +7,6 @@ class Mastermind{
 class Game {
     - int MAX_ATTEMPS = 10
     - string propousalsCombinations[]
-    - int NUM_PLAYERS = 0
     - isWinner()
     - isLooser()
     - isFinished()
@@ -18,37 +17,15 @@ class Game {
     - getPropousalsCombinations()
 }
 
-class Combination{
-    - int COMBINATION_LENGTH = 4
-    - string POSSIBLE_COLORS = "rgbypw"
-    - int hasValidLength()
-    - boolean hasValidColors()
-    - boolean hasRepetedColors()
-    - string getPossibleColors()
-    - int getCombinationLength()
-
-} 
-
-class CombinationView{
-    - getSecretCombination()
-    - getPropousalCombination()
-}
-
-
 class GameView{
     - playGames()
     - isResumed()
     - playGame()
 }
 
-class Board{
-    resetBoard()
-}
-
 class TurnView{
     - readNumPlayers()
     - interact()
-
 }
 
 class Turn{
@@ -67,33 +44,51 @@ class ContinueDialogView{
     - isNegative()
 }
 
-class SecretCombination{
+class Combination{
+    - int COMBINATION_LENGTH = 4
+    - string POSSIBLE_COLORS = "rgbypw"
+    - int hasValidLength()
+    - boolean hasValidColors()
+    - boolean hasRepetedColors()
+    - string getPossibleColors()
+    - int getCombinationLength()
 
+} 
+class SecretCombination{
+    - getSecretCombination()
 }
 class PropousalCombination{
-
+    - getPropousalCombination()
 }
+
+class Player{}
+class RandomPlayer{}
+class HumanPlayer{}
 
 Mastermind *-down-> GameView
 Mastermind *-down-> Game
 
-GameView .down.> ContinueDialogView
 GameView *-down-> BoardView
 GameView *-down-> TurnView
 GameView .-down-> Game
-
-Game .-down-> Turn
-Game .-down-> Board
-
-BoardView *-down-> Board
-BoardView .-down-> Game
+GameView .-down-> ContinueDialogView
 
 TurnView *-down-> Turn
+TurnView *-down-> Player
 TurnView .-down-> BoardView
-TurnView *-down-> CombinationView
 TurnView .-down-> Game
 
-CombinationView *-down-> Combination
+Game .-down-> Combination
+
+BoardView .-down-> Game
+
+Player <|-down- RandomPlayer
+Player <|-down- HumanPlayer
+
+RandomPlayer *-down-> SecretCombination
+
+HumanPlayer *-down-> PropousalCombination
+
 Combination <|-down- SecretCombination
 Combination <|-down- PropousalCombination
 @enduml

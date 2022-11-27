@@ -11,13 +11,9 @@ class Turn {
       this.#activePlayer = 0;
    }
 
-   reset() {
-      this.#players[0] = new RandomPlayer();
-      this.#players[1] = new HumanPlayer();
-      this.#activePlayer = (this.#activePlayer + 1) % Turn.#NUM_PLAYERS;
-   }
+   reset() {}
 
-   getActivePlayer() {
+   getPlayers() {
       return this.#players[this.#activePlayer];
    }
 }

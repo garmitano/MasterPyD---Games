@@ -1,38 +1,44 @@
 import { console } from "../Utils/console.js";
 import { GameMode } from "../Utils/GameMode.js";
-
 import { Turn } from "../Models/Turn.js";
-import { HumanPlayerView, RandomPlayerView } from "./PlayerView.js";
+import { HumanPlayer, RandomPlayer } from "./Player.js";
+import { SecretCombination } from "../Models/Combination.js";
+import { CombinationView } from "./CombinationView.js";
+import { Message } from "./Message.js";
 
 class TurnView {
    #turn;
    #numPlayers;
    #boarView;
-   #activePlayerView;
+   #activePlayer;
+   #secretPlayer;
+   #propousalPlayer;
 
    constructor(boardView) {
+      this.#turn = new Turn();
       this.#boarView = boardView;
       this.#numPlayers = new GameMode().read();
+      this.initPlayers();
    }
 
+   initPlayers() {
+      if (this.#numPlayers === 0) {
+         this.#secretPlayer = new RandomPlayer();
+         this.#propousalPlayer = new RandomPlayer();
+      } else if (this.#numPlayers === 1) {
+         this.#secretPlayer = new RandomPlayer();
+         this.#propousalPlayer = new HumanPlayer();
+      } else {
+         this.#secretPlayer = new HumanPlayer();
+         this.#propousalPlayer = new HumanPlayer();
+      }
+   }
+
+   getSecretCombination() {
+      new SecretCombination(this.#secretPlayer);
+   }
    interact() {
-      console.writeln(`jugamos con ${this.#numPlayers}`);
-      // if (this.#numPlayers == 0) {
-      //    console.writeln("Demo");
-      //    this.#turn.getActivePlayer().accept(this);
-      // } else if (this.#numPlayers == 1) {
-      //    console.writeln("Human vs Machine");
-      //    this.#turn.getActivePlayer().accept(this);
-      // } else {
-      //    console.writeln("Human vs Human");
-      // }
-   }
-
-   visitHumanPlayer(humanPlayer) {
-      this.#activePlayerView = new HumanPlayerView(humanPlayer);
-   }
-   visitRandomPlayer(randomPlayer) {
-      this.#activePlayerView = new RandomPlayerView(randomPlayer);
+      new CombinationView().getCombination(Message.PROPOUSAL_PLAYER);
    }
 }
 
