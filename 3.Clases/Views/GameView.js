@@ -12,7 +12,7 @@ class GameView {
    constructor(game) {
       this.#game = game;
       this.#boardView = new BoardView();
-      this.#turnView = new TurnView();
+      this.#turnView = new TurnView(this.#game);
    }
 
    playGames() {

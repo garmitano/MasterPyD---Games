@@ -1,5 +1,5 @@
 import { console } from "../Utils/console.js";
-import { PropousalCombination } from "../Models/Combination.js";
+import { PropousalCombination, Combination } from "../Models/Combination.js";
 import { Message } from "./Message.js";
 
 class CombinationView {
@@ -26,7 +26,7 @@ class CombinationView {
          }
       } while (this.#propousalCombination.isNotValid(propousalCombination));
       console.writeln(propousalCombination);
-      this.#propousalCombination.addPropouseCombination(propousalCombination);
+      this.#propousalCombination.addPropousalCombination(propousalCombination);
       return this.#propousalCombination;
    }
 
@@ -57,4 +57,4 @@ class PropousalCombinationView extends CombinationView {
       super();
    }
 }
-export { SecretCombinationView, PropousalCombinationView };
+export { SecretCombinationView, PropousalCombinationView, CombinationView };

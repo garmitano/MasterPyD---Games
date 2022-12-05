@@ -4,11 +4,13 @@ import { GameMode } from "../Utils/GameMode.js";
 import { Message } from "./Message.js";
 
 class TurnView {
+   #game;
    #turn;
    #numPlayers;
 
-   constructor(boardView) {
-      this.#turn = new Turn();
+   constructor(game) {
+      this.#game = game;
+      this.#turn = new Turn(this.#game);
       this.#numPlayers = new GameMode();
    }
 
@@ -16,9 +18,11 @@ class TurnView {
       let userPlayers = this.#numPlayers.read();
       this.#turn.reset(userPlayers);
    }
+   getSecretCombination() {
+      this.#turn.getSecretPlayer().accept(this);
+   }
    interact() {
       this.#turn.getActivePlayer().accept(this);
-      this.#turn.next()
    }
 
    visitHumanPlayer(userPlayer) {

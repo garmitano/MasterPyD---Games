@@ -1,6 +1,7 @@
 import { HumanPlayer, RandomPlayer } from "../Models/Player.js";
 import { Message } from "../Views/Message.js";
 import { console } from "../Utils/console.js";
+import { Game } from "./Game.js";
 
 class Combination {
    static COMBINATION_LENGTH = 4;
@@ -42,7 +43,7 @@ class PropousalCombination extends Combination {
       let propousalCombination =
          this.propousalsCombinations[this.propousalsCombinations.length - 1];
       let result = [];
-      [...this.secretCombination].forEach((element, index) => {
+      [...Game.secretCombination].forEach((element, index) => {
          if ([...propousalCombination].indexOf(element) === index) {
             result.push("b");
          } else if (propousalCombination.includes(element)) {
@@ -82,4 +83,4 @@ class PropousalCombination extends Combination {
    }
 }
 
-export { SecretCombination, PropousalCombination };
+export { SecretCombination, PropousalCombination, Combination };

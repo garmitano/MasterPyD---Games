@@ -4,6 +4,7 @@ import { PropousalCombination } from "../Models/Combination.js";
 class Game {
    #MAX_ATTEMPS = 10;
    #propousalCombination;
+   static secretCombination;
 
    constructor() {
       this.#propousalCombination = new PropousalCombination();
@@ -19,8 +20,8 @@ class Game {
          .every((element) => element === "b");
    }
    isFinished() {
-      console.writeln(`${this.isLoser()} + ${this.isWinner()}`);
-      return this.isLoser() || this.isWinner();
+      console.writeln(`${Game.secretCombination}`);
+      return false; //this.isLoser() || this.isWinner();
    }
    getAttemps() {
       return this.#propousalCombination.getNumPropousalsCombinations();

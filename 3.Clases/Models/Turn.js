@@ -1,37 +1,41 @@
 import { console } from "../Utils/console.js";
+import { RandomPlayerView, HumanPlayerView } from "../Views/PlayerView.js";
+import { Game } from "./Game.js";
 import { HumanPlayer, RandomPlayer } from "./Player.js";
 
 class Turn {
-   static #NUM_PLAYERS = 2;
-   #activePlayer;
    #players;
-   constructor() {
+   constructor(game) {
       this.#players = [];
-      this.#activePlayer = 0;
    }
 
    reset(userPlayers) {
       if (userPlayers === 0) {
+         let player = new RandomPlayerView();
+         Game.secretCombination = player.getSecretCombination();
          this.#players[0] = new RandomPlayer();
          this.#players[1] = new RandomPlayer();
       } else if (userPlayers === 1) {
+         let player = new RandomPlayerView();
+         Game.secretCombination = player.getSecretCombination();
          this.#players[0] = new RandomPlayer();
          this.#players[1] = new HumanPlayer();
       } else {
+         let player = new HumanPlayerView();
+         Game.secretCombination = player.getSecretCombination();
          this.#players[0] = new HumanPlayer();
          this.#players[1] = new HumanPlayer();
       }
-      
    }
 
    getPlayers() {
       return this.#players;
    }
-   getActivePlayer() {
-      return this.#players[this.#activePlayer];
+   getSecretPlayer() {
+      return this.#players[0];
    }
-   next() {
-      return (this.#activePlayer = 1);
+   getActivePlayer() {
+      return this.#players[1];
    }
 }
 
