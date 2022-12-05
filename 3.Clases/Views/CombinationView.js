@@ -46,15 +46,4 @@ class CombinationView {
    }
 }
 
-class SecretCombinationView extends CombinationView {
-   constructor(player) {
-      super();
-   }
-}
-
-class PropousalCombinationView extends CombinationView {
-   constructor(player) {
-      super();
-   }
-}
-export { SecretCombinationView, PropousalCombinationView, CombinationView };
+export { CombinationView };

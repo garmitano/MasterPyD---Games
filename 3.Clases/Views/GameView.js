@@ -1,5 +1,4 @@
 import { YesNoDialog } from "../Utils/YesNoDialog.js";
-
 import { BoardView } from "./BoardView.js";
 import { TurnView } from "./TurnView.js";
 
@@ -12,7 +11,7 @@ class GameView {
    constructor(game) {
       this.#game = game;
       this.#boardView = new BoardView();
-      this.#turnView = new TurnView(this.#game);
+      this.#turnView = new TurnView();
    }
 
    playGames() {

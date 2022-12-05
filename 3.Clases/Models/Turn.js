@@ -5,7 +5,7 @@ import { HumanPlayer, RandomPlayer } from "./Player.js";
 
 class Turn {
    #players;
-   constructor(game) {
+   constructor() {
       this.#players = [];
    }
 

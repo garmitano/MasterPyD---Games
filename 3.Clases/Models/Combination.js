@@ -1,5 +1,4 @@
 import { HumanPlayer, RandomPlayer } from "../Models/Player.js";
-import { Message } from "../Views/Message.js";
 import { console } from "../Utils/console.js";
 import { Game } from "./Game.js";
 
@@ -7,6 +6,7 @@ class Combination {
    static COMBINATION_LENGTH = 4;
    static POSIBLE_COLORS = "rgbypw";
    static NAME_COLORS = ["Red", "Green", "Blue", "Yellow", "Pink", "White"];
+   static secretCombination;
 
    constructor() {}
 
@@ -19,14 +19,7 @@ class Combination {
    getNameColors() {
       return this.NAME_COLORS;
    }
-
    getCombination() {}
-}
-
-class SecretCombination extends Combination {
-   constructor() {
-      super();
-   }
 }
 
 class PropousalCombination extends Combination {
@@ -43,7 +36,7 @@ class PropousalCombination extends Combination {
       let propousalCombination =
          this.propousalsCombinations[this.propousalsCombinations.length - 1];
       let result = [];
-      [...Game.secretCombination].forEach((element, index) => {
+      [...Combination.secretCombination].forEach((element, index) => {
          if ([...propousalCombination].indexOf(element) === index) {
             result.push("b");
          } else if (propousalCombination.includes(element)) {
@@ -83,4 +76,4 @@ class PropousalCombination extends Combination {
    }
 }
 
-export { SecretCombination, PropousalCombination, Combination };
+export { PropousalCombination, Combination };
