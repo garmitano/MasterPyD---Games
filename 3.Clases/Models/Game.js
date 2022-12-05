@@ -1,51 +1,32 @@
 import { console } from "../Utils/console.js";
+import { PropousalCombination } from "../Models/Combination.js";
 
 class Game {
    #MAX_ATTEMPS = 10;
-   #propousalsCombinations = [];
+   #propousalCombination;
 
    constructor() {
-      console.writeln(`Dentro de Game ${this.#MAX_ATTEMPS}`);
+      this.#propousalCombination = new PropousalCombination();
    }
 
-   //    addPropouseCombination (propousalCombination) {
-   //       propousalsCombinations.push(propousalCombination);
-   //    }
-   //    getResult (propousalCombination) {
-   //       result = [];
-   //       [...secretCombination].forEach((element, index) => {
-   //          if ([...propousalCombination].indexOf(element) === index) {
-   //             result.push("b");
-   //          } else if (propousalCombination.includes(element)) {
-   //             result.push("w");
-   //          } else {
-   //             result.push(" ");
-   //          }
-   //       });
-
-   //    }
-   //    isLoser () {
-   //       return this.getAttemps() === MAX_ATTEMPS ? true : false;
-   //    }
-   //    isWinner () {
-   //       return result.every((element) => element === "b");
-   //    }
-   //    finished () {
-   //       return this.isLoser() || this.isWinner();
-   //    }
-   //    getAttemps () {
-   //       return propousalsCombinations.length;
-   //    }
-   //    getMaxAttemps () {
-   //       return MAX_ATTEMPS;
-   //    }
-   //    getPropousalsCombinations () {
-   //       return propousalsCombinations;
-   //    }
-   // };
-
+   isLoser() {
+      return this.getAttemps() === this.#MAX_ATTEMPS ? true : false;
+   }
+   isWinner() {
+      console.writeln(`result ${this.#propousalCombination.getResult()}`);
+      return this.#propousalCombination
+         .getResult()
+         .every((element) => element === "b");
+   }
    isFinished() {
-      return true;
+      console.writeln(`${this.isLoser()} + ${this.isWinner()}`);
+      return this.isLoser() || this.isWinner();
+   }
+   getAttemps() {
+      return this.#propousalCombination.getNumPropousalsCombinations();
+   }
+   getMaxAttemps() {
+      return this.#MAX_ATTEMPS;
    }
 }
 

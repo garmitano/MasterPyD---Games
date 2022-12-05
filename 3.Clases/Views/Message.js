@@ -1,4 +1,4 @@
-import { console } from "../utils/views/console.js";
+import { console } from "../Utils/console.js";
 
 class Message {
    static TITLE = new Message(`--- MASTERMIND ---`);

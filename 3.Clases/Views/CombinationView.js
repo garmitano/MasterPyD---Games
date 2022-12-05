@@ -4,13 +4,12 @@ import { Message } from "./Message.js";
 
 class CombinationView {
    #propousalCombination;
+   #secretCombination = "";
    constructor() {
       this.#propousalCombination = new PropousalCombination();
-      console.writeln(`Dentro de CombinationView`);
-      this.getPropousalCombination();
    }
 
-   getCombination(message) {
+   readCombination(message) {
       let propousalCombination = "";
       do {
          propousalCombination = console.readString(message);
@@ -26,8 +25,36 @@ class CombinationView {
             console.writeln("Al menos un color esta repetido.\n");
          }
       } while (this.#propousalCombination.isNotValid(propousalCombination));
-      return propousalCombination;
+      console.writeln(propousalCombination);
+      this.#propousalCombination.addPropouseCombination(propousalCombination);
+      return this.#propousalCombination;
+   }
+
+   getRandomCombination() {
+      let color = "";
+      let count = 0;
+      do {
+         color = Combination.POSIBLE_COLORS[parseInt(Math.random() * 6)];
+         console.writeln(`${color} - ${this.#secretCombination}`);
+         if (!this.#secretCombination.includes(color)) {
+            this.#secretCombination += color;
+            count++;
+         }
+      } while (count < Combination.COMBINATION_LENGTH + 1);
+
+      return this.#secretCombination;
    }
 }
 
-export { CombinationView };
+class SecretCombinationView extends CombinationView {
+   constructor(player) {
+      super();
+   }
+}
+
+class PropousalCombinationView extends CombinationView {
+   constructor(player) {
+      super();
+   }
+}
+export { SecretCombinationView, PropousalCombinationView };

@@ -1,11 +1,11 @@
-import { RandomPlayer } from "./Player";
-import { CombinationView } from "../Views/CombinationView";
+import { HumanPlayer, RandomPlayer } from "../Models/Player.js";
 import { Message } from "../Views/Message.js";
+import { console } from "../Utils/console.js";
 
 class Combination {
-   static #COMBINATION_LENGTH = 4;
-   static #POSIBLE_COLORS = "rgbypw";
-   static #NAME_COLORS = ["Red", "Green", "Blue", "Yellow", "Pink", "White"];
+   static COMBINATION_LENGTH = 4;
+   static POSIBLE_COLORS = "rgbypw";
+   static NAME_COLORS = ["Red", "Green", "Blue", "Yellow", "Pink", "White"];
 
    constructor() {}
 
@@ -18,48 +18,42 @@ class Combination {
    getNameColors() {
       return this.NAME_COLORS;
    }
+
+   getCombination() {}
 }
 
 class SecretCombination extends Combination {
-   #secretCombination;
-   #player;
-   constructor(player) {
+   constructor() {
       super();
-      if (player instanceof RandomPlayer) {
-         this.readRandom();
-      } else {
-         this.readConsole();
-      }
-      this.#secretCombination = "";
-   }
-
-   readRandom() {
-      let color = "";
-      let count = 0;
-      do {
-         color = Combination.POSIBLE_COLORS[parseInt(Math.random() * 6)];
-         if (!this.#secretCombination.includes(color)) {
-            this.#secretCombination += color;
-            count++;
-         }
-      } while (count < this.getCombinationLength());
-      console.writeln(this.#secretCombination);
-   }
-   readConsole() {
-      //leer por consola la secretCombination
-      this.#secretCombination = new CombinationView().getCombination(
-         Message.SECRET_PLAYER.toString()
-      );
-   }
-   get() {
-      return this.#secretCombination;
    }
 }
 
 class PropousalCombination extends Combination {
+   propousalsCombinations = [];
    constructor() {
       super();
    }
+
+   addPropousalCombination(propousalCombination) {
+      this.propousalsCombinations.push(propousalCombination);
+   }
+
+   getResult() {
+      let propousalCombination =
+         this.propousalsCombinations[this.propousalsCombinations.length - 1];
+      let result = [];
+      [...this.secretCombination].forEach((element, index) => {
+         if ([...propousalCombination].indexOf(element) === index) {
+            result.push("b");
+         } else if (propousalCombination.includes(element)) {
+            result.push("w");
+         } else {
+            result.push(" ");
+         }
+      });
+      return result;
+   }
+
    hasValidLengh(propousalCombination) {
       return propousalCombination.length === Combination.COMBINATION_LENGTH;
    }
@@ -82,6 +76,9 @@ class PropousalCombination extends Combination {
    }
    isNotValid(propousalCombination) {
       return this.hasRepeatedColors(propousalCombination);
+   }
+   getNumPropousalsCombinations() {
+      return this.propousalsCombinations.length;
    }
 }
 

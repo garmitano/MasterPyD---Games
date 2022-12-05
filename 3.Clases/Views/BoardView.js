@@ -11,6 +11,12 @@ class BoardView {
    showTitle() {
       console.writeln("\n-------Mastermind-------\n");
    }
+   showIt() {
+      console.writeln("\n-------asi estamos pais-------\n");
+   }
+   showResult() {
+      console.writeln("\n-------TERMINO-------\n");
+   }
 }
 
 export { BoardView };
