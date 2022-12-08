@@ -1,18 +1,16 @@
 import { console } from "../Utils/console.js";
-import { Board } from "../Models/Board.js";
 
 class BoardView {
-   #board;
-
-   constructor() {
-      this.#board = new Board();
+   #combination;
+   constructor(combination) {
+      this.#combination = combination;
    }
 
    showTitle() {
       console.writeln("\n-------Mastermind-------\n");
    }
    showIt() {
-      console.writeln("\n-------asi estamos pais-------\n");
+      console.writeln(`Result ${Combination.getResult()}`);
    }
    showResult() {
       console.writeln("\n-------TERMINO-------\n");

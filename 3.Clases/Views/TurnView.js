@@ -1,10 +1,11 @@
-import { Turn } from "../Models/Turn.js";
 import { HumanPlayerView, RandomPlayerView } from "./PlayerView.js";
 import { GameMode } from "../Utils/GameMode.js";
+import { Turn } from "../Models/Turn.js";
 
 class TurnView {
    #turn;
    #numPlayers;
+   #activePlayerView;
 
    constructor() {
       this.#turn = new Turn();
@@ -15,18 +16,17 @@ class TurnView {
       let userPlayers = this.#numPlayers.read();
       this.#turn.reset(userPlayers);
    }
-   // getSecretCombination() {
-   //    this.#turn.getSecretPlayer().accept(this);
-   // }
+
    interact() {
       this.#turn.getActivePlayer().accept(this);
+      this.#activePlayerView.play();
    }
 
-   visitHumanPlayer(userPlayer) {
-      new HumanPlayerView(userPlayer).interact();
+   visitHumanPlayer() {
+      this.#activePlayerView = new HumanPlayerView();
    }
-   visitRandomPlayer(userPlayer) {
-      new RandomPlayerView(userPlayer).interact();
+   visitRandomPlayer() {
+      this.#activePlayerView = new RandomPlayerView();
    }
 }
 

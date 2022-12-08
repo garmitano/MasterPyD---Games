@@ -1,31 +1,15 @@
-import { HumanPlayer, RandomPlayer } from "../Models/Player.js";
-import { console } from "../Utils/console.js";
-import { Game } from "./Game.js";
-
 class Combination {
    static COMBINATION_LENGTH = 4;
    static POSIBLE_COLORS = "rgbypw";
    static NAME_COLORS = ["Red", "Green", "Blue", "Yellow", "Pink", "White"];
-   static secretCombination;
+   static MAX_ATTEMPS = 10;
+   propousalsCombinations = [];
+   secretCombination = "";
 
    constructor() {}
 
-   getPosibleColors() {
-      return this.POSIBLE_COLORS;
-   }
-   getCombinationLength() {
-      return this.COMBINATION_LENGTH;
-   }
-   getNameColors() {
-      return this.NAME_COLORS;
-   }
-   getCombination() {}
-}
-
-class PropousalCombination extends Combination {
-   propousalsCombinations = [];
-   constructor() {
-      super();
+   setSecretCombination(combination) {
+      this.secretCombination = combination;
    }
 
    addPropousalCombination(propousalCombination) {
@@ -36,7 +20,7 @@ class PropousalCombination extends Combination {
       let propousalCombination =
          this.propousalsCombinations[this.propousalsCombinations.length - 1];
       let result = [];
-      [...Combination.secretCombination].forEach((element, index) => {
+      [...this.secretCombination].forEach((element, index) => {
          if ([...propousalCombination].indexOf(element) === index) {
             result.push("b");
          } else if (propousalCombination.includes(element)) {
@@ -48,32 +32,18 @@ class PropousalCombination extends Combination {
       return result;
    }
 
-   hasValidLengh(propousalCombination) {
-      return propousalCombination.length === Combination.COMBINATION_LENGTH;
+   isLoser() {
+      return this.getAttemps() === this.MAX_ATTEMPS ? true : false;
    }
-   hasValidColors(propousalCombination) {
-      const colors = Combination.POSIBLE_COLORS;
-      const unionColors = new Set([...colors, ...propousalCombination]);
-      return unionColors.size === 6 ? true : false;
+   isWinner() {
+      return getResult().every((element) => element === "b");
    }
-   hasRepeatedColors(propousalCombination) {
-      let colors = [...propousalCombination];
-      let count = 0;
-      for (let i = 0; i < colors.length; i++) {
-         for (let j = 0; j < colors.length; j++) {
-            if (colors[i] === colors[j]) {
-               count++;
-            }
-         }
-      }
-      return count > 4 ? true : false;
+   isFinished() {
+      return this.isLoser() || this.isWinner();
    }
-   isNotValid(propousalCombination) {
-      return this.hasRepeatedColors(propousalCombination);
-   }
-   getNumPropousalsCombinations() {
+   getAttemps() {
       return this.propousalsCombinations.length;
    }
 }
 
-export { PropousalCombination, Combination };
+export { Combination };

@@ -7,6 +7,9 @@ class Board {
    }
 
    reset() {}
+   getResult() {
+      return true;
+   }
 }
 
 export { Board };
