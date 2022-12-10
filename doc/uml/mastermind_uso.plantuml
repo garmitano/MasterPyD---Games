@@ -1,0 +1,4 @@
+@startuml uso
+actor SecretPlayer
+actor PropousalPlayer
+@enduml

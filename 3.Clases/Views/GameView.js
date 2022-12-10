@@ -28,6 +28,7 @@ class GameView {
       this.#boardView.showTitle();
       this.#turnView.readPlayers();
       do {
+         //this.#boardView.showIt();
          this.#turnView.interact();
       } while (!this.#board.isFinished());
       this.#boardView.showResult();

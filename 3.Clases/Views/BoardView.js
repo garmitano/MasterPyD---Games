@@ -10,7 +10,7 @@ class BoardView {
       console.writeln("\n-------Mastermind-------\n");
    }
    showIt() {
-      console.writeln(`Result ${this.#board.getResult()}`);
+      console.writeln(`Result ${this.#board.getResult()} resultado`);
    }
    showResult() {
       console.writeln("\n-------TERMINO-------\n");

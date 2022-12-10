@@ -1,3 +1,4 @@
+import { console } from "../Utils/console.js";
 class Board {
    static COMBINATION_LENGTH = 4;
    static POSIBLE_COLORS = "rgbypw";
@@ -21,12 +22,18 @@ class Board {
 
    addPropousalCombination(propousalCombination) {
       this.propousalsCombinations.push(propousalCombination);
+      console.writeln(
+         `agrego la propousal al array de ${this.propousalsCombinations.length} elementos`
+      );
    }
 
    getResult() {
       let propousalCombination =
          this.propousalsCombinations[this.propousalsCombinations.length - 1];
       let result = [];
+      console.writeln(
+         `elijo la ultima propousal del array ${propousalCombination} elementos`
+      );
       [...this.secretCombination].forEach((element, index) => {
          if ([...propousalCombination].indexOf(element) === index) {
             result.push("b");
