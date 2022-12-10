@@ -4,11 +4,14 @@ class Player {
 }
 
 class HumanPlayer extends Player {
-   constructor() {
+   constructor(player) {
       super();
    }
    accept(visitor) {
       visitor.visitHumanPlayer(this);
+   }
+   acceptSecret(visitor) {
+      visitor.visitHumanSecretPlayer(this);
    }
 }
 
@@ -18,6 +21,9 @@ class RandomPlayer extends Player {
    }
    accept(visitor) {
       visitor.visitRandomPlayer(this);
+   }
+   acceptSecret(visitor) {
+      visitor.visitRandomSecretPlayer(this);
    }
 }
 

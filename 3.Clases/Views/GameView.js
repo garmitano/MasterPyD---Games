@@ -1,17 +1,20 @@
 import { YesNoDialog } from "../Utils/YesNoDialog.js";
 import { BoardView } from "./BoardView.js";
-import { Board } from "../Models/Board.js
+import { Board } from "../Models/Board.js";
 import { TurnView } from "./TurnView.js";
+import { Turn } from "../Models/Turn.js";
 
 class GameView {
-   #board
+   #board;
    #boardView;
+   #turn;
    #turnView;
 
    constructor() {
-      this.#board = new Board()
+      this.#board = new Board();
+      this.#turn = new Turn(this.#board);
       this.#boardView = new BoardView(this.#board);
-      this.#turnView = new TurnView();
+      this.#turnView = new TurnView(this.#turn);
    }
 
    playGames() {
@@ -21,11 +24,12 @@ class GameView {
    }
 
    playGame() {
+      this.#board.reset();
       this.#boardView.showTitle();
       this.#turnView.readPlayers();
       do {
          this.#turnView.interact();
-      } while (!this.#board.getResult());
+      } while (!this.#board.isFinished());
       this.#boardView.showResult();
    }
 
