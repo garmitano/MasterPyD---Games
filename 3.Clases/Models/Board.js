@@ -1,4 +1,3 @@
-import { console } from "../Utils/console.js";
 class Board {
    static COMBINATION_LENGTH = 4;
    static POSIBLE_COLORS = "rgbypw";
@@ -6,6 +5,7 @@ class Board {
    static MAX_ATTEMPS = 10;
    propousalsCombinations = [];
    secretCombination = "";
+   currentPropousalCombination = "";
 
    constructor() {
       this.reset();
@@ -22,18 +22,15 @@ class Board {
 
    addPropousalCombination(propousalCombination) {
       this.propousalsCombinations.push(propousalCombination);
-      console.writeln(
-         `agrego la propousal al array de ${this.propousalsCombinations.length} elementos`
-      );
+
+      this.currentPropousalCombination = propousalCombination;
    }
 
    getResult() {
       let propousalCombination =
          this.propousalsCombinations[this.propousalsCombinations.length - 1];
       let result = [];
-      console.writeln(
-         `elijo la ultima propousal del array ${propousalCombination} elementos`
-      );
+
       [...this.secretCombination].forEach((element, index) => {
          if ([...propousalCombination].indexOf(element) === index) {
             result.push("b");
@@ -47,7 +44,7 @@ class Board {
    }
 
    isLoser() {
-      return this.getAttemps() === this.MAX_ATTEMPS ? true : false;
+      return this.getAttemps() === Board.MAX_ATTEMPS ? true : false;
    }
    isWinner() {
       return this.getResult().every((element) => element === "b");
@@ -57,6 +54,9 @@ class Board {
    }
    getAttemps() {
       return this.propousalsCombinations.length;
+   }
+   getCurrentPropousalCombination() {
+      return this.currentPropousalCombination;
    }
 }
 

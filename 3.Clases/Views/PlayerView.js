@@ -16,7 +16,6 @@ class HumanPlayerView extends PlayerView {
    readCombination() {
       let tmpCombination = "";
       do {
-         console.writeln(`le pido una combinacion por consola ${this.message}`);
          tmpCombination = console.readString(this.message);
          if (!this.hasValidLengh(tmpCombination)) {
             console.writeln("Debe ingresar una combinacion de 4 colores\n");
@@ -68,7 +67,7 @@ class RandomPlayerView extends PlayerView {
             count++;
          }
       } while (count < Board.COMBINATION_LENGTH);
-      console.writeln(`le pido combinacion random ${tmpCombination}`);
+
       return tmpCombination;
    }
 }

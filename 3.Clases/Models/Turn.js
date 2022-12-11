@@ -1,5 +1,4 @@
 import { HumanPlayer, RandomPlayer } from "./Player.js";
-import { console } from "../Utils/console.js";
 
 class Turn {
    static MAX_PLAYERS = 2;
@@ -22,18 +21,12 @@ class Turn {
          this.#players[0] = new HumanPlayer();
          this.#players[1] = new HumanPlayer();
       }
-      console.writeln(
-         `se reseteo el juego con  ${numHumanPlayers} jugadores humanos`
-      );
    }
    setSecretCombination(combinacion) {
       this.#board.setSecretCombination(combinacion);
    }
    play(combination) {
       this.#board.addPropousalCombination(combination);
-      console.writeln(
-         `agrego la propousal al array y pido el result al board ${this.#board.getResult()} result`
-      );
       return this.#board.getResult();
    }
    getPlayers() {
