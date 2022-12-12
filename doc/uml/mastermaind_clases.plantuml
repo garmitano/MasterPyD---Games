@@ -4,9 +4,57 @@ class Mastermind{
     - playGames()
 }
 
-class Game {
-    - int MAX_ATTEMPS = 10
-    - string propousalsCombinations[]
+class GameView{
+    - playGames()
+    - isResumed()
+    - playGame()
+}
+
+class TurnView{
+    - readPlayers()
+    - interact()
+    - visitHumanPlayer()
+    - visitRandomPlayer()
+    - visitHumanSecretPlayer()
+    - visitRandomSecretPlayer()
+}
+
+class HumanPlayerView{
+    - readCombination()
+    - hasValidLength()
+    - hasValidColors()
+    - hasRepetedColors()
+    - isNotValid()
+}
+
+class RandomPlayerView{
+    - readCombination()
+}
+
+class Turn{
+    {static} MAX_PLAYERS = 2  
+    - reset()
+    - play()
+    - getPlayers()
+    - getSecretPlayer()
+    - getActivePlayer()
+    - setSecretCombination()
+}
+
+class BoardView{
+    - showTitle()
+    - showIt()
+    - showResult()
+}
+
+class Board {
+    {static} COMBINATION_LENGTH = 4
+    {static} POSIBLE_COLORS = "rgbypw";
+    {static} NAME_COLORS = ["Red", "Green", "Blue", "Yellow", "Pink", "White"]
+    {static} MAX_ATTEMPS = 10
+    - propousalsCombinations[]
+    - secretCombination = ""
+    - currentPropousalCombination = ""   
     - isWinner()
     - isLooser()
     - isFinished()
@@ -17,33 +65,14 @@ class Game {
     - getPropousalsCombinations()
 }
 
-class GameView{
-    - playGames()
-    - isResumed()
-    - playGame()
+class HumanPlayer{
+    accept()
+    acceptSecret()
 }
 
-class TurnView{
-    - numPlayers
-    - interact(numPlayer)
-    - initPlayers()
-}
-
-class Turn{
-    - reset()
-    - getNext()
-    - getActivePlayer()
-}
-
-class BoardView{
-    - showTitle()
-    - showIt()
-    - showResult()
-}
-
-class YesNoDialogView{
-    - isAfirmative()
-    - isNegative()
+class RandomPlayer{
+    accept()
+    acceptSecret()
 }
 
 class GameMode{
@@ -60,51 +89,33 @@ class ClosedInterval{
     - isIncluded()
 }
 
-class Combination{
-    - int COMBINATION_LENGTH = 4
-    - string POSSIBLE_COLORS = "rgbypw"
-    - int hasValidLength()
-    - boolean hasValidColors()
-    - boolean hasRepetedColors()
-    - string getPossibleColors()
-    - int getCombinationLength()
-    - read()
-
-} 
-class SecretCombination{
-    - read(player)
-    - getSecretCombination()
+class YesNoDialogView{
+    - isAfirmative()
+    - isNegative()
 }
-class PropousalCombination{
-    - read(player)
-    - getPropousalCombination()
-}
-
-class Player{}
-class RandomPlayer{}
-class HumanPlayer{}
 
 Mastermind *-down-> GameView
-Mastermind *-down-> Game
 
 GameView *-down-> BoardView
 GameView *-down-> TurnView
-GameView .-down-> Game
+GameView *-down-> Board
+GameView *-down-> Turn
 GameView *-down-> YesNoDialogView
 
-TurnView *-down-> Turn
-TurnView .-down-> BoardView
+TurnView .-down-> Turn
 TurnView *-down-> GameMode
-TurnView .-down-> Combination
-TurnView .-down-> Player
+TurnView .-down-> HumanPlayerView
+TurnView .-down-> RandomPlayerView
 
-BoardView .-down-> Game
+Turn .-down-> Board
+Turn *-down-> HumanPlayer
+Turn *-down-> RandomPlayer
 
-Player <|-down- RandomPlayer
-Player <|-down- HumanPlayer
+BoardView .-down-> Board
 
-Combination <|-down- SecretCombination
-Combination <|-down- PropousalCombination
+HumanPlayerView .-down-> Board
+
+RandomPlayerView .-down-> Board
 
 GameMode *-down-> ClosedInterval
 @enduml
